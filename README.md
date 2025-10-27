@@ -1,20 +1,38 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# ByteBuddy - Vercel & Supabase Setup
 
-# Run and deploy your AI Studio app
+This application is configured to be deployed on Vercel and uses Supabase for its backend (authentication and database).
 
-This contains everything you need to run your app locally.
+## 1. Vercel Deployment
 
-View your app in AI Studio: https://ai.studio/apps/drive/1E3dkM2p2AWX30dSphQ7I2BHNJtGi77Sp
+1.  Push this code to a GitHub/GitLab/Bitbucket repository.
+2.  Import the project into Vercel. Vercel should automatically detect that it's a Vite project.
+3.  Configure the Environment Variables as described below.
+4.  Deploy!
 
-## Run Locally
+## 2. Supabase Project Setup
 
-**Prerequisites:**  Node.js
+1.  Go to [supabase.com](https://supabase.com) and create a new project.
+2.  Navigate to the **SQL Editor** in your Supabase project dashboard.
+3.  Copy the entire content of the `supabase.sql` file from this repository and run it in the SQL Editor. This will create the necessary tables (`profiles`, `conversations`, `messages`), enable Row Level Security (RLS), and set up a trigger to create a user profile on signup.
+4.  Navigate to **Project Settings** > **API**. Find your Project URL and your `anon` public key. You will need these for the Vercel environment variables.
+5.  Navigate to **Authentication** > **URL Configuration**. Set your **Site URL** to the URL of your Vercel deployment (e.g., `https://your-app-name.vercel.app`). This is crucial for password reset emails to work correctly.
 
+## 3. Environment Variables
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+In your Vercel project settings, go to **Settings** > **Environment Variables** and add the following:
+
+| Name | Value | Description |
+| :--- | :--- | :--- |
+| `API_KEY` | `your_gemini_api_key` | Your Google Gemini API key. |
+| `VITE_SUPABASE_URL` | `your_supabase_project_url` | The URL of your Supabase project. |
+| `VITE_SUPABASE_ANON_KEY` | `your_supabase_anon_public_key` | The `anon` public key for your Supabase project. |
+
+**Note:** For local development, you can create a `.env` file in the root of the project and add these variables there.
+
+```
+API_KEY=your_gemini_api_key
+VITE_SUPABASE_URL=your_supabase_project_url
+VITE_SUPABASE_ANON_KEY=your_supabase_anon_public_key
+```
+
+The app is now ready to be deployed.

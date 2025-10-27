@@ -1,0 +1,81 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --gradient-primary: linear-gradient(to right, hsl(220, 90%, 60%), hsl(260, 100%, 70%));
+  --gradient-primary-hover: linear-gradient(to right, hsl(220, 90%, 65%), hsl(260, 100%, 75%));
+}
+body {
+  background-color: hsl(222 47% 11%);
+  color: hsl(210 40% 98%);
+  font-family: 'Figtree', sans-serif;
+}
+.font-heading {
+  font-family: 'Sora', sans-serif;
+}
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: hsl(220 13% 25%);
+  border-radius: 5px;
+  border: 2px solid hsl(222 47% 11%);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(220 13% 40%);
+}
+.prose h3 {
+  font-family: 'Sora', sans-serif;
+  margin-bottom: 0.5em;
+}
+.prose ul {
+  list-style-position: inside;
+  padding-left: 0;
+}
+.prose li {
+  margin-bottom: 0.5rem;
+}
+.bg-aurora {
+  position: relative;
+  overflow: hidden;
+}
+.bg-aurora::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-image:
+    radial-gradient(ellipse 50% 50% at 20% 40%, hsl(220 90% 60% / 0.15), transparent),
+    radial-gradient(ellipse 50% 50% at 80% 60%, hsl(260 100% 70% / 0.15), transparent);
+  z-index: 0;
+  pointer-events: none;
+}
+.bg-aurora-animate::before {
+   animation: aurora 20s infinite linear;
+}
+.card-gradient-border {
+  border: 1px solid;
+  border-image-slice: 1;
+  border-image-source: linear-gradient(to bottom right, hsl(220 13% 25%), hsl(220 13% 15%));
+}
+.card-glow-border {
+  position: relative;
+}
+.card-glow-border::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: 0.7rem; /* slightly larger than card's rounded-lg */
+  background: var(--gradient-primary);
+  z-index: -1;
+  filter: blur(8px);
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+.group:hover .card-glow-border::before,
+.card-glow-border:hover::before {
+  opacity: 0.5;
+}
