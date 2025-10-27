@@ -10,7 +10,6 @@ export default defineConfig({
   plugins: [react()],
   define: {
     // Make process.env variables available in the client-side code
-    'process.env.API_KEY': JSON.stringify(process.env.API_KEY),
     'process.env.VITE_SUPABASE_URL': JSON.stringify(process.env.VITE_SUPABASE_URL),
     'process.env.VITE_SUPABASE_ANON_KEY': JSON.stringify(process.env.VITE_SUPABASE_ANON_KEY),
   },
